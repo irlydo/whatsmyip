@@ -9,8 +9,21 @@ const MapComponent = ({ selectedLocation }) => {
       setCenter(selectedLocation);
     }
   }, [selectedLocation]);
-  
 
+  useEffect(() => {
+    fetch("/api/getUserIpInfo")
+      .then((response) => response.json())
+      .then((data) => {
+        if (data && data.loc) {
+          const [lat, lng] = data.loc.split(",");
+          setSelectedLocation({ lat: parseFloat(lat), lng: parseFloat(lng) });
+          setIpInfo(data); // Assuming you have a state for storing fetched IP details
+        }
+      })
+      .catch((error) => console.error("Error fetching IP info:", error));
+  }, []);
+
+  
   useEffect(() => {
     fetch("/api/location")
       .then((response) => response.json())
@@ -37,23 +50,23 @@ const MapComponent = ({ selectedLocation }) => {
   return (
     <div className="h-full">
       {/* Use Tailwind to ensure this div fills the height of its container */}
-        <GoogleMap
-          mapContainerStyle={mapContainerStyle}
-          zoom={3}
-          center={center}
-          options={{
-            fullscreenControl: false,
-            mapTypeControl: false,
-            streetViewControl: false,
-            zoomControl: false,
-          }}
-        >
-                    {selectedLocation && (
-            <Marker
-              position={{ lat: selectedLocation.lat, lng: selectedLocation.lng }}
-            />
-          )}
-        </GoogleMap>
+      <GoogleMap
+        mapContainerStyle={mapContainerStyle}
+        zoom={3}
+        center={center}
+        options={{
+          fullscreenControl: false,
+          mapTypeControl: false,
+          streetViewControl: false,
+          zoomControl: false,
+        }}
+      >
+        {selectedLocation && (
+          <Marker
+            position={{ lat: selectedLocation.lat, lng: selectedLocation.lng }}
+          />
+        )}
+      </GoogleMap>
     </div>
   );
 };
