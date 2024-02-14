@@ -1,35 +1,15 @@
 import { useState, useEffect, useRef } from "react";
 import { GoogleMap, LoadScript, Marker } from "@react-google-maps/api";
 
-const MapComponent = ({ googleMapsApiKey, onLocationChange }) => {
+const MapComponent = ({ selectedLocation }) => {
   const [center, setCenter] = useState({ lat: -34.397, lng: 150.644 }); // Default center
-  const searchInputRef = useRef(null);
-  const [locations, setLocations] = useState([]); // Add this line
 
   useEffect(() => {
-    let autocomplete;
-    if (window.google) {
-      autocomplete = new window.google.maps.places.Autocomplete(
-        searchInputRef.current,
-        { types: ["(cities)"] }
-      ); // Restrict the search to cities
-      autocomplete.addListener("place_changed", () => {
-        const place = autocomplete.getPlace();
-        if (place.geometry) {
-          const location = {
-            lat: place.geometry.location.lat(),
-            lng: place.geometry.location.lng(),
-          };
-          onLocationChange(location); // Update parent component's state
-        }
-      });
+    if (selectedLocation) {
+      setCenter(selectedLocation);
     }
-    return () => {
-      if (autocomplete) {
-        window.google.maps.event.clearInstanceListeners(autocomplete);
-      }
-    };
-  }, [onLocationChange]);
+  }, [selectedLocation]);
+  
 
   useEffect(() => {
     fetch("/api/location")
