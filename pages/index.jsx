@@ -40,7 +40,7 @@ export default function Home() {
   };
   
   return (
-    <div className="flex min-h-screen bg-black">
+    <div className="flex min-h-screen bg-gradient-to-r from-slate-700 to-slate-800">
       <LoadScript googleMapsApiKey={googleMapsApiKey} libraries={["places"]}>
         <Head>
           <title>What is my IP</title>
