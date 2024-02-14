@@ -39,7 +39,7 @@ export default function Home() {
     <div className="flex min-h-screen bg-black">
       <LoadScript googleMapsApiKey={googleMapsApiKey} libraries={["places"]}>
         <Head>
-          <title>What is my IP?</title>
+          <title>What is my IP</title>
         </Head>
         {/* Content Area - Left Side */}
         <div className="flex-1 max-w-1/2 w-1/2 flex flex-col items-center justify-center text-white">
