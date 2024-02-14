@@ -48,6 +48,11 @@ const MapComponent = ({ selectedLocation }) => {
             zoomControl: false,
           }}
         >
+                    {selectedLocation && (
+            <Marker
+              position={{ lat: selectedLocation.lat, lng: selectedLocation.lng }}
+            />
+          )}
         </GoogleMap>
     </div>
   );

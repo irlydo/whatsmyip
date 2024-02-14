@@ -33,8 +33,6 @@ export default function Home() {
       .catch(error => console.error("Failed to fetch IP details:", error));
   };
   
-  
-
   return (
     <div className="flex min-h-screen bg-black">
       <LoadScript googleMapsApiKey={googleMapsApiKey} libraries={["places"]}>
