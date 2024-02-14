@@ -5,7 +5,7 @@ import { useState, useRef, useEffect } from "react";
 import { LoadScript } from "@react-google-maps/api";
 
 export default function Home() {
-  const [selectedLocation, setSelectedLocation] = useState({ lat: 0, lng: 0 });
+  const [selectedLocation, setSelectedLocation] = useState(null);
   const googleMapsApiKey = process.env.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY;
   const ipInputRef = useRef(null);
 
@@ -14,7 +14,13 @@ export default function Home() {
   useEffect(() => {
     fetch("/api/getUserIpInfo")
       .then((response) => response.json())
-      .then((data) => setIpInfo(data))
+      .then((data) => {
+        setIpInfo(data); // Set the IP info for display
+        if (data.loc) {
+          const [lat, lng] = data.loc.split(",");
+          setSelectedLocation({ lat: parseFloat(lat), lng: parseFloat(lng) }); // Set the location for the map
+        }
+      })
       .catch((error) => console.error("Error fetching IP info:", error));
   }, []);
 
