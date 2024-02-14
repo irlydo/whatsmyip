@@ -25,7 +25,7 @@ const MapComponent = ({ selectedLocation }) => {
         }
       })
       .catch((error) => {
-        console.error("Failed to fetch user's location:", error);
+        console.error("Failed to fetch users location:", error);
       });
   }, []);
 
@@ -36,7 +36,6 @@ const MapComponent = ({ selectedLocation }) => {
 
   return (
     <div className="h-full">
-      {" "}
       {/* Use Tailwind to ensure this div fills the height of its container */}
         <GoogleMap
           mapContainerStyle={mapContainerStyle}
