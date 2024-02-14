@@ -1,5 +1,5 @@
-import { useState, useEffect, useRef } from "react";
-import { GoogleMap, LoadScript, Marker } from "@react-google-maps/api";
+import { useState, useEffect } from "react";
+import { GoogleMap, Marker } from "@react-google-maps/api";
 
 const MapComponent = ({ selectedLocation }) => {
   const [center, setCenter] = useState({ lat: -34.397, lng: 150.644 }); // Default center
@@ -21,25 +21,6 @@ const MapComponent = ({ selectedLocation }) => {
         }
       })
       .catch((error) => console.error("Error fetching IP info:", error));
-  }, []);
-
-  
-  useEffect(() => {
-    fetch("/api/location")
-      .then((response) => response.json())
-      .then((data) => {
-        console.log(data); // Add this to log the response data
-        if (data.location) {
-          // Check if location data exists
-          const [lat, lng] = data.location.split(",");
-          setCenter({ lat: parseFloat(lat), lng: parseFloat(lng) });
-        } else {
-          console.error("Location data not found:", data);
-        }
-      })
-      .catch((error) => {
-        console.error("Failed to fetch users location:", error);
-      });
   }, []);
 
   const mapContainerStyle = {
