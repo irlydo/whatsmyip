@@ -63,7 +63,7 @@ export default function Home() {
     <div className="flex flex-col md:flex-row min-h-screen bg-gradient-to-r from-slate-700 to-slate-800">
       <LoadScript googleMapsApiKey={googleMapsApiKey} libraries={["places"]}>
         <Head>
-          <title>What is my IP</title>
+          <title>{ipInfo?.ip} | WMIP?</title>
         </Head>
         {/* Content Area - Left Side */}
         <div className="flex-1 flex flex-col items-center justify-center text-white p-4">
