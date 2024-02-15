@@ -51,6 +51,9 @@ export default function Home() {
           const [lat, lng] = data.loc.split(",");
           setSelectedLocation({ lat: parseFloat(lat), lng: parseFloat(lng) });
           setIpInfo(data);
+          if (ipInputRef.current) {
+            ipInputRef.current.value = "";
+          }
         }
       })
       .catch((error) => console.error("Failed to fetch IP details:", error));
@@ -102,7 +105,7 @@ export default function Home() {
             ref={ipInputRef}
             onKeyDown={handleKeyPress}
             type="text"
-            placeholder="Enter IP Address..."
+            placeholder="Enter IP Address...(eg. 8.8.8.8)"
             className="p-2 w-80 text-black mt-4"
           />
           <button
