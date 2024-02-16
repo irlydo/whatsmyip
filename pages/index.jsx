@@ -71,7 +71,8 @@ export default function Home() {
           {ipInfo && (
             <div className="text-white">
               <h2 className="text-xl font-bold max-w-80 text-center">
-                Hello! Here are your details! Review your IP or input another!
+                Hello! Welcome to WMIP!<br></br>
+                Review your IP or input another!
               </h2>
               <hr className="my-4"></hr>
               <h2 className="text-xl">
